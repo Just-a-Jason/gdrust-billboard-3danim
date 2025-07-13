@@ -1,2 +1,2 @@
-pub use gdrust_bilboard_3danim_core::prelude::*;
-pub use gdrust_bilboard_3danim_derive::*;
+pub use gdrust_billboard_3danim_core::prelude::*;
+pub use gdrust_billboard_3danim_derive::*;

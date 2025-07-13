@@ -3,13 +3,13 @@ use godot::{
     prelude::*,
 };
 
-use crate::{core::calculate_angle, traits::BilboardAnimation};
+use crate::{core::calculate_angle, traits::BillboardAnimation};
 use crate::{enums::Direction, traits::Animator};
 
-/// BilboardAnimator is a struct used to wrap AnimatedSprite3D.
+/// BillboardAnimator is a struct used to wrap AnimatedSprite3D.
 /// It automatictly manages all the roation for you.
 /// You just need to set the camera and your sprite and you are ready to go!
-pub struct BilboardAnimator<A: BilboardAnimation + Copy> {
+pub struct BillboardAnimator<A: BillboardAnimation + Copy> {
     // Godot objects
     sprite: Option<Gd<AnimatedSprite3D>>,
     camera: Option<Gd<Camera3D>>,
@@ -26,9 +26,9 @@ pub struct BilboardAnimator<A: BilboardAnimation + Copy> {
 }
 
 // Assoc functions
-impl<A: BilboardAnimation + Copy> BilboardAnimator<A> {
+impl<A: BillboardAnimation + Copy> BillboardAnimator<A> {
     pub fn new(default_animation: A) -> Self {
-        BilboardAnimator {
+        BillboardAnimator {
             // Godot objects
             sprite: Option::default(),
             camera: Option::default(),
@@ -45,7 +45,7 @@ impl<A: BilboardAnimation + Copy> BilboardAnimator<A> {
 }
 
 // Private functions
-impl<A: BilboardAnimation + Copy> BilboardAnimator<A> {
+impl<A: BillboardAnimation + Copy> BillboardAnimator<A> {
     fn update_animation(&mut self) {
         let sprite = self.sprite.as_mut().unwrap();
 
@@ -68,7 +68,7 @@ impl<A: BilboardAnimation + Copy> BilboardAnimator<A> {
 }
 
 // Public api
-impl<A: BilboardAnimation + Copy> BilboardAnimator<A> {
+impl<A: BillboardAnimation + Copy> BillboardAnimator<A> {
     pub fn set_looping(&mut self, looping: bool) {
         self.looping = looping;
     }
@@ -91,7 +91,7 @@ impl<A: BilboardAnimation + Copy> BilboardAnimator<A> {
 }
 
 // Animator trait impl
-impl<A: BilboardAnimation + Copy> Animator<A> for BilboardAnimator<A> {
+impl<A: BillboardAnimation + Copy> Animator<A> for BillboardAnimator<A> {
     fn update(&mut self) {
         if !self.is_setup() {
             godot_warn!(

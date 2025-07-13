@@ -8,19 +8,19 @@ pub mod macros {
 }
 
 pub mod traits {
-    pub use gdrust_bilboard_3danim_core::traits::*;
+    pub use gdrust_billboard_3danim_core::traits::*;
 }
 
 pub mod enums {
-    pub use gdrust_bilboard_3danim_core::enums::*;
+    pub use gdrust_billboard_3danim_core::enums::*;
 }
 
 pub mod animators {
-    pub use gdrust_bilboard_3danim_core::animators::*;
+    pub use gdrust_billboard_3danim_core::animators::*;
 }
 
 pub mod core {
-    pub use gdrust_bilboard_3danim_core::core::*;
+    pub use gdrust_billboard_3danim_core::core::*;
 }
 
 pub mod prelude;

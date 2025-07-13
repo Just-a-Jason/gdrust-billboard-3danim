@@ -11,7 +11,7 @@ use proc_macro::TokenStream;
 /// ```
 /// // use statement of the DirectionEnum...
 ///
-/// #[derive(BilboardAnimation)]
+/// #[derive(BillboardAnimation)]
 /// enum AnimationStates {
 ///     Idle,
 ///     Walk
@@ -24,9 +24,9 @@ use proc_macro::TokenStream;
 /// }
 /// ```
 ///
-#[proc_macro_derive(BilboardAnimation)]
-pub fn derive_bilboard_animation(input: TokenStream) -> TokenStream {
-    derive::derive_bilboard_animation_impl(input)
+#[proc_macro_derive(BillboardAnimation)]
+pub fn derive_billboard_animation(input: TokenStream) -> TokenStream {
+    derive::derive_billboard_animation_impl(input)
 }
 
 /// This attribute macro converts any enum to `GodotEnum` and also derives `BilboardAnimation` trait.
