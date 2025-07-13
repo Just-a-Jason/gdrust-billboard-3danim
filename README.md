@@ -5,7 +5,7 @@
 # Animator trait
 
 ```rs
-pub trait Animator<A> where A: BilboardAnimation, {
+pub trait Animator<A> where A: BillboardAnimation, {
     // Updates animator state
     fn update(&mut self);
     fn change_animation(&mut self, animation: A);
@@ -35,7 +35,7 @@ pub trait Animator<A> where A: BilboardAnimation, {
 > [!WARNING] > `To be able to use it you have to add all animation variants like for example by using this derive macro to generate all animation names at compile time`
 
 ```rs
-use gdrust_bilboard_3danim::prelude::*;
+use gdrust_billboard_3danim::prelude::*;
 
 #[GodotAnimationEnum]
 enum MyAnimationStates {
@@ -46,7 +46,7 @@ enum MyAnimationStates {
 ```
 
 ```rs
-use gdrust_bilboard_3danim::prelude::*;
+use gdrust_billboard_3danim::prelude::*;
 use godot::prelude::*;
 
 // This attribute macro generates a fully working Bilboard animator class for you.
