@@ -1,4 +1,4 @@
-![Image](https://github.com/user-attachments/assets/9a0f8d6e-c7b0-4fda-9b00-d52502d2be8a)
+![Image](https://github.com/Just-a-Jason/gdrust-bilboard-3danim/blob/main/preview.gif)
 
 `gdrust-bilboard-3danim` is a Rust library for animating 3D sprites based on the camera's viewing direction—similar to the classic Doom-style visuals. It allows for smooth sprite angle switching and animation control depending on where the player is looking.
 
