@@ -50,7 +50,7 @@ use gdrust_billboard_3danim::prelude::*;
 use godot::prelude::*;
 
 // This attribute macro generates a fully working Bilboard animator class for you.
-#[GodotAnimatorClass(animation="MyAnimationStates")]
+#[GodotAnimatorClass(MyAnimationStates)]
 pub struct MyAnimatorClass;
 ```
 

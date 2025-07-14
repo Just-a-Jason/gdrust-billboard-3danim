@@ -1,36 +1,18 @@
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{
-    Expr, ItemStruct, Meta, MetaNameValue, parse::Parser, parse_macro_input,
-    punctuated::Punctuated, token::Comma,
-};
+use syn::{ItemStruct, Path, parse_macro_input, punctuated::Punctuated, token::Comma};
 
 pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemStruct);
     let struct_name = input.ident.clone();
 
-    let args = Punctuated::<Meta, Comma>::parse_terminated
-        .parse(attr)
-        .expect("Failed to parse attribute args");
+    let paths = parse_macro_input!(attr with Punctuated::<Path, Comma>::parse_terminated);
 
-    let mut animation_enum = None;
+    let animation_path = paths
+        .first()
+        .expect("Expected #[GodotAnimatorClass(AnimationEnum)]")
+        .clone();
 
-    for meta in args {
-        if let Meta::NameValue(MetaNameValue { path, value, .. }) = meta {
-            if path.is_ident("animation") {
-                if let Expr::Lit(expr_lit) = value {
-                    if let syn::Lit::Str(lit_str) = expr_lit.lit {
-                        animation_enum = Some(lit_str.value());
-                    }
-                }
-            }
-        }
-    }
-
-    let animation_enum =
-        animation_enum.expect("Expected #[animation = \"BilboardAnimation Enum\"]");
-    let animation_ident = syn::Ident::new(&animation_enum, proc_macro2::Span::call_site());
-    // To change that in the future
     let expanded = quote! {
         use godot::prelude::*;
 
@@ -40,7 +22,7 @@ pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> Token
             #[export]
             loop_animation: bool,
 
-            animator: gdrust_billboard_3danim::animators::BillboardAnimator<#animation_ident>,
+            animator: gdrust_billboard_3danim::animators::BillboardAnimator<#animation_path>,
             base: Base<Node3D>,
         }
 
@@ -48,7 +30,7 @@ pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> Token
         impl INode3D for #struct_name {
             fn init(base: Base<Self::Base>) -> Self {
                 Self {
-                    animator: gdrust_billboard_3danim::animators::BillboardAnimator::new(#animation_ident::default()),
+                    animator: gdrust_billboard_3danim::animators::BillboardAnimator::new(#animation_path::default()),
                     loop_animation: bool::default(),
                     base,
                 }
@@ -72,7 +54,7 @@ pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> Token
             }
 
             #[func]
-            pub fn change_animation(&mut self, animation: #animation_ident) {
+            pub fn change_animation(&mut self, animation: #animation_path) {
                 self.animator.change_animation(animation);
             }
 
@@ -118,7 +100,7 @@ pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> Token
             }
 
             #[func]
-            pub fn play_one_shot(&mut self, animation: #animation_ident) {
+            pub fn play_one_shot(&mut self, animation: #animation_path) {
                 self.animator.play_one_shot(animation);
             }
 
@@ -128,7 +110,7 @@ pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> Token
             }
 
             #[signal]
-            pub fn on_animation_finished(animation: #animation_ident);
+            pub fn on_animation_finished(animation: #animation_path);
         }
     };
 
