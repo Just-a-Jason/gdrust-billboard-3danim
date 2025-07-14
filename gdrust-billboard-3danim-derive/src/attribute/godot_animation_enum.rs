@@ -15,7 +15,7 @@ pub fn expand_godot_enum(item: TokenStream) -> TokenStream {
 
     if !derive_found {
         input.attrs.push(syn::parse_quote!(
-            #[derive(GodotConvert, Var, Export, Default, Copy, Clone, Debug, BilboardAnimation)]
+            #[derive(GodotConvert, Var, Export, Default, Copy, Clone, Debug, BillboardAnimation)]
         ));
     }
 

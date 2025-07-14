@@ -4,14 +4,14 @@ mod derive;
 
 use proc_macro::TokenStream;
 
-/// This macro derives BilboardAnimation for any enum.
+/// This macro derives BillboardAnimation for any enum.
 /// It's required to work with `BilboardAnimator`
 /// If you need to use it in Rust codebase without strong integration with GDScript you can use this macro. If you need to export it to godots engine and use it to export it in the inspector use `GodotAnimationEnum` attribute macro in that case.
 /// Example usage:
 /// ```
 /// // use statement of the DirectionEnum...
 ///
-/// #[derive(BilboardAnimation)]
+/// #[derive(BillboardAnimation)]
 /// enum AnimationStates {
 ///     Idle,
 ///     Walk
@@ -23,10 +23,9 @@ use proc_macro::TokenStream;
 ///     assert_eq!(animation.rotate(Direction::Left), "idle_left");
 /// }
 /// ```
-///
-#[proc_macro_derive(BilboardAnimation)]
-pub fn derive_bilboard_animation(input: TokenStream) -> TokenStream {
-    derive::derive_bilboard_animation_impl(input)
+#[proc_macro_derive(BillboardAnimation)]
+pub fn derive_billboard_animation(input: TokenStream) -> TokenStream {
+    derive::derive_billboard_animation_impl(input)
 }
 
 /// This attribute macro converts any enum to `GodotEnum` and also derives `BilboardAnimation` trait.

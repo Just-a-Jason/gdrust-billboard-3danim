@@ -40,7 +40,7 @@ pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> Token
             #[export]
             loop_animation: bool,
 
-            animator: gdrust_bilboard_3danim::prelude::BilboardAnimator<#animation_ident>,
+            animator: gdrust_billboard_3danim::animators::BillboardAnimator<#animation_ident>,
             base: Base<Node3D>,
         }
 
@@ -48,7 +48,7 @@ pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> Token
         impl INode3D for #struct_name {
             fn init(base: Base<Self::Base>) -> Self {
                 Self {
-                    animator: gdrust_bilboard_3danim::prelude::BilboardAnimator::new(#animation_ident::default()),
+                    animator: gdrust_billboard_3danim::animators::BillboardAnimator::new(#animation_ident::default()),
                     loop_animation: bool::default(),
                     base,
                 }

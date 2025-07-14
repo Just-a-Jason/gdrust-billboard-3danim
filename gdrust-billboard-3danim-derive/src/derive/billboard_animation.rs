@@ -2,7 +2,7 @@ use proc_macro::TokenStream;
 use quote::quote;
 use syn::{DeriveInput, parse_macro_input};
 
-pub fn derive_bilboard_animation_impl(input: TokenStream) -> TokenStream {
+pub fn derive_billboard_animation_impl(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
 
@@ -26,7 +26,7 @@ pub fn derive_bilboard_animation_impl(input: TokenStream) -> TokenStream {
     });
 
     let expanded = quote! {
-        impl BilboardAnimation for #name {
+        impl BillboardAnimation for #name {
             fn rotate(&self, direction: Direction) -> &'static str {
                 match self {
                     #(#match_arms)*
