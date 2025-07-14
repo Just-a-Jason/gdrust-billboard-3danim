@@ -1,11 +1,11 @@
 [package]
-name = "gdrust-billboard-3danim"
+name = "gdrust-bilboard-3danim"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-gdrust-billboard-3danim-core = { path = "./gdrust-billboard-3danim-core" }
-gdrust-billboard-3danim-derive = { path = "./gdrust-billboard-3danim-derive" }
+gdrust-bilboard-3danim-core = { path = "./gdrust-bilboard-3danim-core" }
+gdrust-bilboard-3danim-derive = { path = "./gdrust-bilboard-3danim-derive" }
 godot = { version = "0.3.2", features = ["experimental-godot-api"] }
 
 [profile.release]

@@ -1,5 +1,5 @@
 [package]
-name = "gdrust-billboard-3danim-derive"
+name = "gdrust-bilboard-3danim-derive"
 version = "0.1.0"
 edition = "2024"
 
@@ -9,7 +9,7 @@ proc-macro = true
 
 [dependencies]
 # Core lib
-gdrust-billboard-3danim-core = { path = "../gdrust-billboard-3danim-core" }
+gdrust-bilboard-3danim-core = { path = "../gdrust-bilboard-3danim-core" }
 syn = { version = "2.0.100", features = ["full", "parsing"] }
 proc-macro2 = "1.0.94"
 quote = "1.0.40"

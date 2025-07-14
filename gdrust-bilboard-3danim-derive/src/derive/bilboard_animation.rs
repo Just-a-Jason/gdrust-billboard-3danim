@@ -2,14 +2,14 @@ use proc_macro::TokenStream;
 use quote::quote;
 use syn::{DeriveInput, parse_macro_input};
 
-pub fn derive_billboard_animation_impl(input: TokenStream) -> TokenStream {
+pub fn derive_bilboard_animation_impl(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = &input.ident;
 
     let variants = if let syn::Data::Enum(syn::DataEnum { variants, .. }) = &input.data {
         variants
     } else {
-        panic!("BillboardAnimation can only be derived for enums");
+        panic!("BilboardAnimation can only be derived for enums");
     };
 
     let match_arms = variants.iter().map(|variant| {

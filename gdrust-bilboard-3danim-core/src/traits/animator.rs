@@ -1,9 +1,9 @@
 use crate::enums::Direction;
-use crate::traits::BillboardAnimation;
+use crate::traits::BilboardAnimation;
 
 pub trait Animator<A>
 where
-    A: BillboardAnimation,
+    A: BilboardAnimation,
 {
     // Updates animator state
     fn update(&mut self);
