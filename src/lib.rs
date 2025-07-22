@@ -23,4 +23,8 @@ pub mod core {
     pub use gdrust_billboard_3danim_core::core::*;
 }
 
+pub mod constants {
+    pub use gdrust_billboard_3danim_core::constants::*;
+}
+
 pub mod prelude;

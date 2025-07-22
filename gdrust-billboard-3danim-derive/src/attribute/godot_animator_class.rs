@@ -20,9 +20,16 @@ pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> Token
         #[class(base=Node3D)]
         pub struct #struct_name {
             #[export]
+            animated_sprite: Option<Gd<godot::classes::AnimatedSprite3D>>,
+
+            #[export]
+            default_animation: #animation_path,
+
+            #[export]
             loop_animation: bool,
 
             animator: gdrust_billboard_3danim::animators::BillboardAnimator<#animation_path>,
+
             base: Base<Node3D>,
         }
 
@@ -30,7 +37,12 @@ pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> Token
         impl INode3D for #struct_name {
             fn init(base: Base<Self::Base>) -> Self {
                 Self {
+                    animated_sprite: Option::default(),
+
+                    default_animation: #animation_path::default(),
+
                     animator: gdrust_billboard_3danim::animators::BillboardAnimator::new(#animation_path::default()),
+
                     loop_animation: bool::default(),
                     base,
                 }
@@ -38,6 +50,18 @@ pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> Token
 
             fn ready(&mut self) {
                 self.animator.set_looping(self.loop_animation);
+
+                if let Some(tree) = self.base().get_tree().as_mut() {
+                    let camera = tree.get_first_node_in_group(gdrust_billboard_3danim::constants::CAMERA_GROUP).and_then(|n| Some(n.cast::<godot::classes::Camera3D>()));
+
+                    if let Some(camera) = camera {
+                        self.animator.set_camera(camera);
+                    }
+                }
+
+                if let Some(sprite) = self.animated_sprite.as_ref() {
+                    self.animator.set_sprite(Clone::clone(sprite));
+                }
 
                 let mut emitter = self.base().clone();
                 self.animator.on_animation_finished(move |animation| {
