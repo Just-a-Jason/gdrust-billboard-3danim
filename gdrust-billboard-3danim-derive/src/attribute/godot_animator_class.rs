@@ -63,9 +63,15 @@ pub fn impl_godot_animation_class(attr: TokenStream, item: TokenStream) -> Token
                     self.animator.set_sprite(Clone::clone(sprite));
                 }
 
-                let mut emitter = self.base().clone();
+                let mut emitter = self.base_mut().clone();
                 self.animator.on_animation_finished(move |animation| {
-                    let _ = emitter.emit_signal("on_animation_finished", &[animation.to_variant()]);
+                    let _ = emitter.call_deferred(
+                        "emit_signal",
+                        &[
+                            "on_animation_finished".to_variant(),
+                            animation.to_variant(),
+                        ],
+                    );
                 });
             }
         }
